@@ -72,36 +72,37 @@ public class PostProcessor {
             }
         }
 
-        public void apply(JpegTransformer transformer) {
+        public void apply(ParameterJpeg parameter) {
             switch (orientation) {
                 case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                    transformer.flipHorizontal();
+                    parameter.flipHorizontal();
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_180:
-                    transformer.rotate(180);
+                    parameter.rotate(180);
                     break;
                 case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                    transformer.flipVertical();
+                    parameter.flipVertical();
                     break;
                 case ExifInterface.ORIENTATION_TRANSPOSE:
-                    transformer.rotate(90);
-                    transformer.flipHorizontal();
+                    parameter.rotate(90);
+                    parameter.flipHorizontal();
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_90:
-                    transformer.rotate(90);
+                    parameter.rotate(90);
                     break;
                 case ExifInterface.ORIENTATION_TRANSVERSE:
-                    transformer.rotate(270);
-                    transformer.flipHorizontal();
+                    parameter.rotate(270);
+                    parameter.flipHorizontal();
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_270:
-                    transformer.rotate(90);
+                    parameter.rotate(90);
                     break;
                 case ExifInterface.ORIENTATION_NORMAL:
                 case ExifInterface.ORIENTATION_UNDEFINED:
                     break;
             }
         }
+        
 
         public boolean areDimensionsFlipped() {
             switch (orientation) {
@@ -128,6 +129,15 @@ public class PostProcessor {
 
     }
 
+    class TransformerParameterJpeg implements ParameterJpeg {
+        
+        private JpegTransformer transformer;
+        
+        public TransformerParameterJpeg(JpegTransformer transformer) {
+            this.transformer = transformer;
+            }
+    }
+        
     private static class CenterCrop {
 
         private int width;
