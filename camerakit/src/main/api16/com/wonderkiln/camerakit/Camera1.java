@@ -1104,3 +1104,11 @@ public class Camera1 extends CameraImpl {
         return new Rect(left - 1000, top - 1000, right - 1000, bottom - 1000);
     }
 }
+
+class TestingCamera1 extends Camera1 {
+    void setFacing(@Facing int facing)) {
+        int internalFacing = new ConstantMapper.FakeFacing(facing).map();
+        return internalFacing;
+    }
+}
+ } 
